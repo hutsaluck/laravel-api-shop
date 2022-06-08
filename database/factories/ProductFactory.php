@@ -20,7 +20,7 @@ class ProductFactory extends Factory
             "name" => $this->faker->word,
             "detail" => $this->faker->paragraph,
             "price" => $this->faker->numberBetween(100,1000),
-            "stock" => $this->faker->randomDigit,
+            "stock" => $this->faker->randomDigit(),
             "discount" => $this->faker->numberBetween(2,30),
             "user_id" => function(){
                 return \App\Models\User::all()->random();
