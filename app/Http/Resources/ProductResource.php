@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductResource extends JsonResource
@@ -14,7 +15,6 @@ class ProductResource extends JsonResource
      */
     public function toArray($request)
     {
-//        return parent::toArray($request);
         return [
             'name' => $this->name,
             'description' => $this->detail,

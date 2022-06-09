@@ -21,23 +21,23 @@ class ReviewController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(ReviewRequest $request , Product $product)
     {
+        $validator = Validator::make($request->all(), [
+            'customer' => ['required', 'min:3', 'max:255'],
+            'review' => ['required', 'min:3', 'max:1000'],
+            'star' => ['required', 'regex:/^\d+(\.\d{1,2})?$'],
+        ])->validate();
+
+        if($validator->fails()){
+            return response()->json('Validation Error.', $validator->errors());
+        }
+
         $review = new Review($request->all());
 
         $product->reviews()->save($review);
@@ -59,17 +59,6 @@ class ReviewController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Review  $review
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Review $review)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -78,6 +67,16 @@ class ReviewController extends Controller
      */
     public function update(Request $request, Product $product, Review $review)
     {
+        $validator = Validator::make($request->all(), [
+            'customer' => ['required', 'min:3', 'max:255'],
+            'review' => ['required', 'min:3', 'max:1000'],
+            'star' => ['required', 'regex:/^\d+(\.\d{1,2})?$'],
+        ])->validate();
+
+        if($validator->fails()){
+            return response()->json('Validation Error.', $validator->errors());
+        }
+
         $review->update($request->all());
     }
 
