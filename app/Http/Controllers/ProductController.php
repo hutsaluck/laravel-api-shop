@@ -34,33 +34,9 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
+        $product = Product::create($request->validated());
 
-        $validator = $request->validate([
-            'name' => ['required', 'unique:posts', 'max:255'],
-            'detail' => ['required', 'min:3', 'max:1000'],
-            'price' => ['required', 'regex:/^\d+(\.\d{1,2})?$'],
-            'stock' => 'required',
-            'discount' => 'required',
-        ]);
-
-        if($validator->fails()){
-            return response()->json('Validation Error.', $validator->errors());
-        }
-
-        $product = new Product;
-        $product->name = $request->name;
-        $product->detail = $request->description;
-        $product->price = $request->price;
-        $product->stock = $request->stock;
-        $product->discount = $request->discount;
-
-        $product->save();
-
-        return response([
-
-            'data' => new ProductResource($product)
-
-        ],Response::HTTP_CREATED);
+        return ProductResource::make($product);
     }
 
     /**
@@ -83,31 +59,9 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        $validator = $request->validate([
-            'name' => ['required', 'unique:posts', 'max:255'],
-            'detail' => ['required', 'min:3', 'max:1000'],
-            'price' => ['required', 'regex:/^\d+(\.\d{1,2})?$'],
-            'stock' => 'required',
-            'discount' => 'required',
-        ]);
+        $product = Product::update($request->validated());
 
-        if($validator->fails()){
-            return response()->json('Validation Error.', $validator->errors());
-        }
-
-        $this->userAuthorize($product);
-
-        $request['detail'] = $request->description;
-
-        unset($request['description']);
-
-        $product->update($request->all());
-
-        return response([
-
-            'data' => new ProductResource($product)
-
-        ],Response::HTTP_CREATED);
+        return ProductResource::make($product);
     }
 
     /**
