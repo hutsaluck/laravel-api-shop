@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
-use App\Http\Resources\ProductResource;
-use Illuminate\Http\Request;
 use App\Http\Resources\ReviewResource;
 use App\Models\Product;
 use App\Models\Review;
@@ -14,7 +11,7 @@ class ReviewController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return ReviewResource
      */
     public function index(Product $product)
     {
@@ -25,7 +22,7 @@ class ReviewController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return ReviewResource
      */
     public function store(ReviewRequest $request , Product $product)
     {
@@ -51,9 +48,9 @@ class ReviewController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Review  $review
-     * @return \Illuminate\Http\Response
+     * @return ReviewResource
      */
-    public function update(Request $request, Product $product, Review $review)
+    public function update(ReviewRequest $request, Product $product, Review $review)
     {
         $review = Review::update($request->validated());
 

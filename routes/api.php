@@ -1,7 +1,10 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\RegisterController;
+use \App\Http\Controllers\LoginController;
+use \App\Http\Controllers\ProductController;
+use \App\Http\Controllers\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,13 +16,21 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::group(['prefix' => 'products'],function(){
-        Route::apiResource('/', App\Http\Controllers\ProductController::class);
-        Route::apiResource('/{product}/reviews',App\Http\Controllers\ReviewController::class);
+        Route::apiResource('/', ProductController::class);
+        Route::apiResource('/{product}/reviews',ReviewController::class);
     });
 });
 
-Route::post('register', [App\Http\Controllers\API\RegisterController::class, 'register'])->name('register');
-Route::post('login', [App\Http\Controllers\API\RegisterController::class, 'login'])->name('login');
+Route::group(['prefix' => 'products'],function(){
+    Route::get('/', [ProductController::class, 'index']);
+    Route::get('/{product}/reviews',[ReviewController::class, 'index']);
+});
+
+Route::post('register', [ RegisterController::class, 'register'])->name('register');
+Route::post('login', [ LoginController::class, 'login'])->name('login');
 

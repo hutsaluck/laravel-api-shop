@@ -5,21 +5,19 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProductRequest;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class ProductController extends Controller
 {
-    /*public function __construct()
+    public function __construct()
     {
         $this->middleware('auth:api')->except('index','show');
-    }*/
+    }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
@@ -30,7 +28,7 @@ class ProductController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return ProductResource
      */
     public function store(ProductRequest $request)
     {
@@ -43,7 +41,7 @@ class ProductController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
+     * @return ProductResource
      */
     public function show(Product $product)
     {
@@ -55,9 +53,9 @@ class ProductController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\JsonResponse
+     * @return ProductResource
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductRequest $request, Product $product)
     {
         $product = Product::update($request->validated());
 
@@ -75,13 +73,5 @@ class ProductController extends Controller
         $product->delete();
 
         return response(null,Response::HTTP_NO_CONTENT);
-    }
-
-
-    public function userAuthorize($product)
-    {
-        if(Auth::user()->id != $product->user_id){
-            return "exception";
-        }
     }
 }
