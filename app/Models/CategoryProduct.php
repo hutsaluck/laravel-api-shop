@@ -12,9 +12,9 @@ class CategoryProduct extends Model
     /*
      * Connect with product
      *
-     * @return App/Models/Product
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function products()
+    public function products(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Product::class);
     }

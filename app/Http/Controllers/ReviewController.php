@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\ReviewResource;
+use App\Http\Requests\ReviewRequest;
 use App\Models\Product;
 use App\Models\Review;
 
@@ -11,9 +12,9 @@ class ReviewController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return ReviewResource
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index(Product $product)
+    public function index(Product $product): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
         return ReviewResource::collection($product->reviews);
     }
@@ -24,7 +25,7 @@ class ReviewController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return ReviewResource
      */
-    public function store(ReviewRequest $request , Product $product)
+    public function store(ReviewRequest $request , Product $product): ReviewResource
     {
         $review = Review::create($request->validated());
         $product->reviews()->save($review);
@@ -38,7 +39,7 @@ class ReviewController extends Controller
      * @param  \App\Models\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function show(Review $review)
+    public function show(Review $review): \Illuminate\Http\Response
     {
         //
     }
@@ -50,7 +51,7 @@ class ReviewController extends Controller
      * @param  \App\Models\Review  $review
      * @return ReviewResource
      */
-    public function update(ReviewRequest $request, Product $product, Review $review)
+    public function update(ReviewRequest $request, Product $product, Review $review): ReviewResource
     {
         $review = Review::update($request->validated());
 
@@ -63,7 +64,7 @@ class ReviewController extends Controller
      * @param  \App\Models\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product, Review $review)
+    public function destroy(Product $product, Review $review): \Illuminate\Http\Response
     {
         $review->delete();
         return response(null,Response::HTTP_NO_CONTENT);

@@ -17,20 +17,23 @@ use \App\Http\Controllers\ReviewController;
 |
 */
 
+/*Route::middleware( 'auth:sanctum' )->group( function () {
+    Route::group( [ 'prefix' => 'products' ], function () {
+        Route::apiResource( '/', ProductController::class );
+        Route::apiResource( '/{product}/reviews', ReviewController::class );
+    } );
+} );*/
+Route::group( [ 'prefix' => 'products' ], function () {
+    Route::apiResource( '/', ProductController::class );
+    Route::put( '/update', [ProductController::class, 'update'] );
+    Route::apiResource( '/{product}/reviews', ReviewController::class );
+} );
 
+Route::group( [ 'prefix' => 'products' ], function () {
+    Route::get( '/', [ ProductController::class, 'index' ] );
+    Route::get( '/{product}/reviews', [ ReviewController::class, 'index' ] );
+} );
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::group(['prefix' => 'products'],function(){
-        Route::apiResource('/', ProductController::class);
-        Route::apiResource('/{product}/reviews',ReviewController::class);
-    });
-});
-
-Route::group(['prefix' => 'products'],function(){
-    Route::get('/', [ProductController::class, 'index']);
-    Route::get('/{product}/reviews',[ReviewController::class, 'index']);
-});
-
-Route::post('register', [ RegisterController::class, 'register'])->name('register');
-Route::post('login', [ LoginController::class, 'login'])->name('login');
+Route::post( 'register', [ RegisterController::class, 'register' ] )->name( 'register' );
+Route::post( 'login', [ LoginController::class, 'login' ] )->name( 'login' );
 

@@ -10,9 +10,20 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'detail', 'stock','price','discount'
+        'user_id',
+        'name',
+        'description',
+        'stock',
+        'price',
+        'discount'
     ];
-    public function reviews()
+
+    /*
+     * Connect with reviews
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function reviews(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Review::class);
     }

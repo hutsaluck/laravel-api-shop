@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\UserNotLogin;
 use App\Http\Requests\LoginRequest;
 use App\Http\Resources\UserResource;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -12,9 +14,9 @@ class LoginController extends Controller
      * Login user
      *
      * @param  LoginRequest $request
-     * @return UserResource|string
+     * @return UserResource|UserNotLogin
      */
-    public function login( LoginRequest $request )
+    public function login( LoginRequest $request ): UserResource|UserNotLogin
     {
         if ( Auth::attempt( [ 'email' => $request->email, 'password' => $request->password ] ) ) {
             $user = Auth::user();
@@ -23,6 +25,6 @@ class LoginController extends Controller
             return UserResource::make( $user );
         }
 
-        return 'Unauthorised';
+        throw new UserNotLogin('User not login');
     }
 }

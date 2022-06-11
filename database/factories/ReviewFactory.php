@@ -14,7 +14,7 @@ class ReviewFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             "product_id" => function(){

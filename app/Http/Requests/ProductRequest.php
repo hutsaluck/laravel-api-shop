@@ -11,7 +11,7 @@ class ProductRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -21,13 +21,14 @@ class ProductRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
+            'user_id' => 'required',
             'name' => 'required|max:255|unique:products',
             'description' => 'required',
             'price' => 'required|max:10',
-            'stock' => 'required|max:6',
+            'stock' => 'required',
             'discount' => 'required|max:2'
         ];
     }

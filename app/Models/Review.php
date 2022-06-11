@@ -12,7 +12,13 @@ class Review extends Model
     protected $fillable = [
         'customer', 'star', 'review'
     ];
-    public function product()
+
+    /*
+      * Connect with product
+      *
+      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+      */
+    public function product(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Product::class);
     }

@@ -10,11 +10,10 @@ class ReviewResource extends JsonResource
      * Transform the resource into an array.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
+     * @return array
      */
-    public function toArray($request)
+    public function toArray($request):array
     {
-//        return parent::toArray($request);
         return [
             'customer' => $this->customer,
             'body' => $this->review,

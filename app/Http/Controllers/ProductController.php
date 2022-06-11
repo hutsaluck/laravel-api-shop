@@ -3,23 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
+use App\Http\Requests\ProductUpdateRequest;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
-    public function __construct()
+    /*public function __construct()
     {
         $this->middleware('auth:api')->except('index','show');
-    }
+    }*/
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index()
+    public function index(): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
         return ProductResource::collection(Product::paginate(5));
     }
@@ -27,10 +29,10 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  ProductRequest  $request
      * @return ProductResource
      */
-    public function store(ProductRequest $request)
+    public function store(ProductRequest $request): ProductResource
     {
         $product = Product::create($request->validated());
 
@@ -40,10 +42,10 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Product  $product
+     * @param  Product  $product
      * @return ProductResource
      */
-    public function show(Product $product)
+    public function show(Product $product): ProductResource
     {
         return new ProductResource($product);
     }
@@ -51,13 +53,13 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
+     * @param  ProductUpdateRequest  $request
+     * @param  Product  $product
      * @return ProductResource
      */
-    public function update(ProductRequest $request, Product $product)
+    public function update(ProductUpdateRequest $request, Product $product): ProductResource
     {
-        $product = Product::update($request->validated());
+        $product = DB::table('products')->where('id', $request['id'])->update($request->validated());
 
         return ProductResource::make($product);
     }
@@ -65,10 +67,10 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Product  $product
+     * @param  Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(Product $product): \Illuminate\Http\Response
     {
         $product->delete();
 
