@@ -59,7 +59,7 @@ class ProductController extends Controller
      */
     public function update(ProductUpdateRequest $request, Product $product): ProductResource
     {
-        $product = DB::table('products')->where('id', $request['id'])->update($request->validated());
+        $product->update($request->validated());
 
         return ProductResource::make($product);
     }
@@ -74,6 +74,6 @@ class ProductController extends Controller
     {
         $product->delete();
 
-        return response(null,Response::HTTP_NO_CONTENT);
+        return response("Product deleted",Response::HTTP_OK);
     }
 }

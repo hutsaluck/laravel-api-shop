@@ -14,9 +14,9 @@ class LoginController extends Controller
      * Login user
      *
      * @param  LoginRequest $request
-     * @return UserResource|UserNotLogin
+     * @return UserResource|string
      */
-    public function login( LoginRequest $request ): UserResource|UserNotLogin
+    public function login( LoginRequest $request ): UserResource|string
     {
         if ( Auth::attempt( [ 'email' => $request->email, 'password' => $request->password ] ) ) {
             $user = Auth::user();
@@ -25,6 +25,7 @@ class LoginController extends Controller
             return UserResource::make( $user );
         }
 
-        throw new UserNotLogin('User not login');
+        $exception = new UserNotLogin();
+        return $exception->report();
     }
 }
