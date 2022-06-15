@@ -25,13 +25,13 @@ class UpdateOrderRequest extends FormRequest
     {
         return [
             "user_id" => "required",
-            "customerName" => "",
-            "customerLastName" => "",
-            "customerEmail" => "",
-            "customerPhone" => "",
-            "customerAddress" => "",
-            "comment" => "",
-            "total" => "",
+            "customerName" => "nullable",
+            "customerLastName" => "nullable",
+            "customerEmail" => "nullable",
+            "customerPhone" => "nullable",
+            "customerAddress" => "nullable",
+            "comment" => "nullable",
+            "total" => "nullable",
         ];
     }
 }

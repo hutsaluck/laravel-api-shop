@@ -25,7 +25,7 @@ class LoginController extends Controller
             return UserResource::make( $user );
         }
 
-        $exception = new UserNotLogin();
-        return $exception->report();
+        throw new UserNotLogin('User unauthorized');
+
     }
 }

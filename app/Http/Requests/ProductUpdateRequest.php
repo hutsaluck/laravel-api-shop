@@ -26,10 +26,10 @@ class ProductUpdateRequest extends FormRequest
         return [
             'user_id' => 'required',
             'name' => 'required|max:255',
-            'description' => '',
+            'description' => 'nullable',
             'price' => 'required|max:10',
-            'stock' => '',
-            'discount' => 'max:2'
+            'stock' => 'nullable',
+            'discount' => 'nullable|max:2'
         ];
     }
 }
