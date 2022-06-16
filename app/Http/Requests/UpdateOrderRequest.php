@@ -24,14 +24,14 @@ class UpdateOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            "user_id" => "required",
-            "customerName" => "nullable",
-            "customerLastName" => "nullable",
-            "customerEmail" => "nullable",
-            "customerPhone" => "nullable",
-            "customerAddress" => "nullable",
+            "user_id" => "required|integer",
+            "customerName" => "required|string",
+            "customerLastName" => "required|string",
+            "customerEmail" => "required|string",
+            "customerPhone" => "required|string",
+            "customerAddress" => "required|string",
             "comment" => "nullable",
-            "total" => "nullable",
+            "total" => "required|integer",
         ];
     }
 }

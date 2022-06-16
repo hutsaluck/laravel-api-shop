@@ -17,9 +17,9 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->text('description')->nullable();
-            $table->double('price');
+            $table->unsignedInteger('price');
             $table->tinyInteger('stock')->nullable();
-            $table->decimal('discount')->nullable();
+            $table->unsignedInteger('discount')->nullable();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

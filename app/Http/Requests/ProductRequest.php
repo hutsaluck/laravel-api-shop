@@ -27,9 +27,9 @@ class ProductRequest extends FormRequest
             'user_id' => 'required',
             'name' => 'required|max:255|unique:products',
             'description' => 'required',
-            'price' => 'required|max:10',
+            'price' => 'required|unsigned integer',
             'stock' => 'required',
-            'discount' => 'required|max:2'
+            'discount' => 'required|unsigned integer'
         ];
     }
 }

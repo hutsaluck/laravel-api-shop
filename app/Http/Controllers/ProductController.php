@@ -6,15 +6,17 @@ use App\Http\Requests\ProductRequest;
 use App\Http\Requests\ProductUpdateRequest;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
+use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
-    /*public function __construct()
+    public function __construct()
     {
-        $this->middleware('auth:api')->except('index','show');
-    }*/
+//        $this->middleware('auth:api')->except('index','show');
+        $this->authorizeResource(Product::class, 'post');
+    }
 
     /**
      * Display a listing of the resource.
@@ -60,6 +62,10 @@ class ProductController extends Controller
     public function update(ProductUpdateRequest $request, Product $product): ProductResource
     {
         $product->update($request->validated());
+
+        if(auth('admin')->user()->cannot('update', $product)){
+            abort(403);
+        }
 
         return ProductResource::make($product);
     }
