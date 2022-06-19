@@ -14,7 +14,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('reviews', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->foreignId('product_id')->constrained()->onDelete('cascade');
             $table->string('customer');
             $table->text('review');

@@ -24,13 +24,12 @@ class StoreOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            "user_id" => "required|integer",
             "customerName" => "required|string",
             "customerLastName" => "required|string",
-            "customerEmail" => "required|string",
-            "customerPhone" => "required|string",
+            "customerEmail" => "required|email|unique:users",
+            "customerPhone" => "required|string|phone",
             "customerAddress" => "required|string",
-            "comment" => "nullable",
+            "comment" => "nullable|string",
             "total" => "required|integer",
         ];
     }
