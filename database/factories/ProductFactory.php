@@ -24,7 +24,8 @@ class ProductFactory extends Factory
             "discount" => $this->faker->numberBetween(2,30),
             "user_id" => function(){
                 return \App\Models\User::all()->random();
-            }
+            },
+            'category_id' => rand(1, 20 ),
         ];
     }
 }

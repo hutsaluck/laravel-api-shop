@@ -31,8 +31,7 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryProductRequest $request, Product $product): CategoryResource
     {
-        $category = Review::create($request->validated());
-        $product->categories()->save($category);
+        $category = CategoryProduct::create($request->validated());
 
         return CategoryResource::make($category);
     }

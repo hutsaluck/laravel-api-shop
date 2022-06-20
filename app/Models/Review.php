@@ -9,9 +9,7 @@ class Review extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'customer', 'star', 'review'
-    ];
+    protected $fillable = ['star', 'review'];
 
     /*
       * Connect with product

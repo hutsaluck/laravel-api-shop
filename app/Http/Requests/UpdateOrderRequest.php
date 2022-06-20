@@ -13,7 +13,7 @@ class UpdateOrderRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,13 +24,13 @@ class UpdateOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            "customerName" => "required|string",
-            "customerLastName" => "required|string",
-            "customerEmail" => "required|email|unique:users",
-            "customerPhone" => "required|string|phone",
-            "customerAddress" => "required|string",
-            "comment" => "nullable|string",
-            "total" => "required|integer",
+            "customerName" => ['required', 'string'],
+            "customerLastName" => ['required', 'string'],
+            "customerEmail" => ['required', 'email', 'unique:users'],
+            "customerPhone" => ['required', 'string', 'phone'],
+            "customerAddress" => ['required', 'string'],
+            "comment" => ['nullable', 'string'],
+            "total" => ['required', 'integer'],
         ];
     }
 }

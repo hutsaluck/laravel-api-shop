@@ -16,8 +16,11 @@ class ProductResource extends JsonResource
     public function toArray($request): array
     {
         return [
-            'user_id' => $this->user_id,
             'name' => $this->name,
+            'category'   => [
+                'id'   => $this->category->id,
+                'name' => $this->category->name,
+            ],
             'description' => $this->description,
             'price' => $this->price,
             'stock' => $this->stock == 0 ? 'Out of stock' : $this->stock,

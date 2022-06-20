@@ -24,8 +24,8 @@ class UpdateCategoryProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'category_id' => 'required|integer',
-            'product_id' => 'required|integer',
+            'category_id' => ['required', 'integer'],
+            'product_id' => ['required', 'integer'],
         ];
     }
 }

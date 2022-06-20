@@ -15,7 +15,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-         'App\Models\Model' => 'App\Policies\ModelPolicy',
+         'App\Models\Product' => 'App\Policies\ProductPolicy',
     ];
 
     /**
@@ -26,13 +26,5 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
-        Gate::define('delete-product', function(User $user, Product $product){
-            return $user->roles->containsStrict('roles', 'admin');
-        });
-
-        Gate::define('update-product', function(User $user, Product $product){
-            return $user->roles->containsStrict('roles', 'admin');
-        });
     }
 }

@@ -18,7 +18,7 @@ class ProductPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->roles->containsStrict('id', 1);
+        return true;
     }
 
     /**
@@ -77,7 +77,7 @@ class ProductPolicy
      */
     public function restore(User $user, Product $product)
     {
-        return $user->roles->containsStrict('id', 1);
+        return false;
     }
 
     /**
@@ -89,6 +89,6 @@ class ProductPolicy
      */
     public function forceDelete(User $user, Product $product)
     {
-        return $user->roles->containsStrict('id', 1);
+        return false;
     }
 }
