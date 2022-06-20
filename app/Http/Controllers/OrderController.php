@@ -22,7 +22,7 @@ class OrderController extends Controller
      */
     public function index(User $user): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
-        return ReviewResource::collection($user->orders);
+        return OrderResource::collection($user->orders);
     }
 
     /**

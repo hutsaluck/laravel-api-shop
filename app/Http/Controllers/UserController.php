@@ -13,9 +13,9 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index()
+    public function index(): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
         return UserResource::collection(User::paginate(5));
     }
