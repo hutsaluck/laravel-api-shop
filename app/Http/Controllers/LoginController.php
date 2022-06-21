@@ -7,7 +7,6 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Laravel\Passport;
 
 class LoginController extends Controller
 {
@@ -17,15 +16,13 @@ class LoginController extends Controller
      * @param  LoginRequest $request
      * @return UserResource|string
      */
-    public function login( LoginRequest $request )
+    public function login( LoginRequest $request ): UserResource|string
     {
         if ( Auth::attempt( [ 'email' => $request->email, 'password' => $request->password ] ) ) {
             $user = Auth::user();
-//            $user->token = $user->createToken('token-name')->plainTextToken;
-//            $user->token = $user->createToken( 'AuthStore' )->accessToken;
-            $user->text_token = $user->createToken( 'AuthStore' )->plainTextToken;
+            $user->token = $user->createToken( 'AuthStore' )->accessToken;
 
-            return [UserResource::make( $user ), $user->text_token];
+            return UserResource::make( $user );
         }
 
         throw new UserNotLogin('User unauthorized');
