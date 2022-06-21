@@ -52,7 +52,7 @@ class ReviewController extends Controller
      * @param  \App\Models\Review  $review
      * @return ReviewResource
      */
-    public function update(ReviewRequest $request, Product $product, Review $review): ReviewResource
+    public function update(ReviewRequest $request, Review $review): ReviewResource
     {
         $review->update($request->validated());
 
@@ -65,7 +65,7 @@ class ReviewController extends Controller
      * @param  \App\Models\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product, Review $review): \Illuminate\Http\Response
+    public function destroy(Review $review): \Illuminate\Http\Response
     {
         $review->delete();
 

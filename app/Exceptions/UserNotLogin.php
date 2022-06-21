@@ -23,7 +23,6 @@ class UserNotLogin extends Exception
         return response([
             'errors' => [
                 'message' => $this->getMessage(),
-                'status' => Response::HTTP_UNAUTHORIZED
             ]
         ], Response::HTTP_UNAUTHORIZED);
     }

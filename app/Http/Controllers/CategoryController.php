@@ -5,10 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCategoryProductRequest;
 use App\Http\Requests\UpdateCategoryProductRequest;
 use App\Http\Resources\CategoryResource;
-use App\Http\Resources\ReviewResource;
 use App\Models\CategoryProduct;
 use App\Models\Product;
-use App\Models\Review;
 use Symfony\Component\HttpFoundation\Response;
 
 class CategoryController extends Controller
@@ -20,7 +18,7 @@ class CategoryController extends Controller
      */
     public function index(Product $product): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
-        return CategoryResource::collection($product->categories);
+        return CategoryResource::collection(CategoryProduct::all());
     }
 
     /**
@@ -69,7 +67,7 @@ class CategoryController extends Controller
      */
     public function destroy(CategoryProduct $categoryProduct)
     {
-        $review->delete();
+        $categoryProduct->delete();
 
         return response("Category Product deleted",Response::HTTP_OK);
     }

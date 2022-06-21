@@ -4,13 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
 use App\Http\Requests\ProductUpdateRequest;
-use App\Http\Resources\PostResource;
 use App\Http\Resources\ProductResource;
-use App\Models\Post;
 use App\Models\Product;
-use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -64,10 +60,6 @@ class ProductController extends Controller
     public function update(ProductUpdateRequest $request, Product $product): ProductResource
     {
         $product->update($request->validated());
-
-        if(auth('admin')->user()->cannot('update', $product)){
-            abort(403);
-        }
 
         return ProductResource::make($product);
     }

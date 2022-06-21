@@ -25,8 +25,6 @@ Route::middleware( 'auth:sanctum' )->group( function () {
         Route::apiResource( '/', ProductController::class );
 
         Route::apiResource( '/{product}/reviews', ReviewController::class );
-
-        Route::apiResource( '/{product}/categories', CategoryController::class );
     } );
 
     Route::group( [ 'prefix' => 'users' ], function () {
@@ -34,6 +32,8 @@ Route::middleware( 'auth:sanctum' )->group( function () {
 
         Route::apiResource( '/{user}/orders', OrderController::class );
     } );
+
+    Route::apiResource( '/categories', CategoryController::class );
 } );
 
 
@@ -41,9 +41,17 @@ Route::group( [ 'prefix' => 'products' ], function () {
     Route::get( '/', [ ProductController::class, 'index' ] );
 
     Route::get( '/{product}/reviews', [ ReviewController::class, 'index' ] )->name( 'reviews.index' );
-
-    Route::get( '/{product}/categories', [ CategoryController::class, 'index' ] );
 } );
+
+Route::group( [ 'prefix' => 'products' ], function () {
+    Route::get( '/', [ ProductController::class, 'index' ] );
+
+    Route::get( '/{product}/reviews', [ ReviewController::class, 'index' ] )->name( 'reviews.index' );
+
+} );
+
+Route::get( '/categories/', [ CategoryController::class, 'index' ] );
+
 
 Route::group( [ 'prefix' => 'users' ], function () {
     Route::get( '/', [ UserController::class, 'index' ] );
@@ -53,4 +61,6 @@ Route::group( [ 'prefix' => 'users' ], function () {
 
 Route::post( 'register', [ RegisterController::class, 'register' ] )->name( 'register' );
 Route::post( 'login', [ LoginController::class, 'login' ] )->name( 'login' );
+
+
 

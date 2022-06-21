@@ -13,7 +13,7 @@ class UpdateCategoryProductRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,8 +24,7 @@ class UpdateCategoryProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'category_id' => ['required', 'integer'],
-            'product_id' => ['required', 'integer'],
+            'name' => ['required', 'text'],
         ];
     }
 }
