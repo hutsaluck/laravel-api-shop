@@ -34,6 +34,7 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request): ProductResource
     {
+        $request['user_id'] = auth()->id();
         $product = Product::create($request->validated());
 
         return ProductResource::make($product);

@@ -16,7 +16,7 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index(Product $product): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+    public function index(): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
         return CategoryResource::collection(CategoryProduct::all());
     }
@@ -27,7 +27,7 @@ class CategoryController extends Controller
      * @param  \App\Http\Requests\StoreCategoryProductRequest  $request
      * @return CategoryResource
      */
-    public function store(StoreCategoryProductRequest $request, Product $product): CategoryResource
+    public function store(StoreCategoryProductRequest $request): CategoryResource
     {
         $category = CategoryProduct::create($request->validated());
 

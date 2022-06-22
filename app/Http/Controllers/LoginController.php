@@ -21,8 +21,10 @@ class LoginController extends Controller
         if ( Auth::attempt( [ 'email' => $request->email, 'password' => $request->password ] ) ) {
             $user = Auth::user();
             $user->token = $user->createToken( 'AuthStore' )->accessToken;
+            $user->plain_token = $user->createToken( 'AuthStore' )->plainTextToken;
 
             return UserResource::make( $user );
+//            return $user->plain_token;
         }
 
         throw new UserNotLogin('User unauthorized');

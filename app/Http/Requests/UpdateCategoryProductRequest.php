@@ -24,7 +24,7 @@ class UpdateCategoryProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'text'],
+            'name' => ['required', 'string'],
         ];
     }
 }

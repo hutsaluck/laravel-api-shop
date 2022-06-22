@@ -28,7 +28,7 @@ class ProductRequest extends FormRequest
             'description' => ['required', 'string'],
             'price' => ['required', 'min:0', 'integer', 'not_in:0'],
             'stock' => ['required', 'integer'],
-            'discount' => ['required', 'integer']
+            'discount' => ['required', 'integer'],
         ];
     }
 }
