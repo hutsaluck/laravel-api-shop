@@ -24,7 +24,6 @@ class LoginController extends Controller
             $user->plain_token = $user->createToken( 'AuthStore' )->plainTextToken;
 
             return UserResource::make( $user );
-//            return $user->plain_token;
         }
 
         throw new UserNotLogin('User unauthorized');

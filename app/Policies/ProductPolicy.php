@@ -41,7 +41,7 @@ class ProductPolicy
      */
     public function create(User $user)
     {
-        return $user->roles->containsStrict('roles', 'admin');
+        return $user->role === 'admin';
     }
 
     /**
@@ -53,7 +53,7 @@ class ProductPolicy
      */
     public function update(User $user, Product $product)
     {
-        return $user->roles->containsStrict('roles', 'admin');
+        return $user->role === 'admin';
     }
 
     /**
@@ -65,7 +65,7 @@ class ProductPolicy
      */
     public function delete(User $user, Product $product)
     {
-        return $user->roles->containsStrict('roles', 'admin');
+        return $user->role === 'admin';
     }
 
     /**
